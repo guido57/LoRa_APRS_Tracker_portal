@@ -1,5 +1,4 @@
 #include <captive_portal.h>
-
 #include <MyAPRSMessage.h>
 #include <Arduino.h>
 #include <LoRa.h>
@@ -8,10 +7,8 @@
 #include <TinyGPS++.h>
 #include <WiFi.h>
 #include <logger.h>
-
-#include <Preferences.h>
+//#include <Preferences.h>
 #include <config.h>
-
 //#include "configuration.h"
 #include "display.h"
 #include "pins.h"
@@ -210,7 +207,7 @@ void loop() {
           send_update = true; // It's time to send a LORA Packet
 
           // enforce message text every n's Config.beacon.timeout frame
-          if (cc["beacon_timeout"]->val_int * rate_limit_message_text > 30)
+          if (cc["beacon_rate"]->val_int * rate_limit_message_text > 30)
           {
             rate_limit_message_text = 0;
           }
@@ -243,7 +240,8 @@ void loop() {
   static bool   BatteryIsConnected   = false;
   static String batteryVoltage       = "";
   static String batteryChargeCurrent = "";
-#ifdef TTGO_T_Beam_V1_0
+  
+  #ifdef TTGO_T_Beam_V1_0
   static unsigned int rate_limit_check_battery = 0;
   if (!(rate_limit_check_battery++ % 60))
     BatteryIsConnected = powerManagement.isBatteryConnect();
@@ -251,9 +249,9 @@ void loop() {
     batteryVoltage       = String(powerManagement.getBatteryVoltage(), 2);
     batteryChargeCurrent = String(powerManagement.getBatteryChargeDischargeCurrent(), 0);
   }
-#endif
+  #endif
 
-  // check if a Heading variation or a position variation > 20 meters require to send now
+  // Check if a Heading variation or a position variation > 20 meters require to send_update
   if (!send_update && gps_loc_update && cc["smart_beacon_active"]->val_bool) {
     //
     uint32_t lastTx = millis() - lastTxTime;
@@ -267,12 +265,16 @@ void loop() {
       }
     }
 
-    // Get headings and heading delta
+    // if in "smart_beacon_min_bcn" seconds heading changed more than "smart_beacon_turn_min"
+    // and distance from last TX location is more than "smart_beacon_min_tx_dist"
+    // then send_update
     double headingDelta = abs(previousHeading - currentHeading);
-    if (lastTx > cc["smart_beacon_min_bcn"]->val_int * 1000) {
+    if (lastTx > cc["smart_beacon_min_bcn"]->val_int) {
       // Check for heading more than 25 degrees
-      if (headingDelta > cc["smart_beacon_turn_min"]->val_int && lastTxdistance > cc["smart_beacon_min_tx_dist"]->val_int) {
-        send_update = true;
+      if (headingDelta > cc["smart_beacon_turn_min"]->val_int){
+        if(lastTxdistance > cc["smart_beacon_min_tx_dist"]->val_int) {
+          send_update = true;
+        }
       }
     }
   }
@@ -287,15 +289,14 @@ void loop() {
     if (cc["smart_beacon_active"]->val_bool)
       nextBeaconTimeStamp = now() + cc["smart_beacon_slow_rate"]->val_int;
     else if (cc["beacon_active"]->val_bool)
-      nextBeaconTimeStamp = now() + cc["beacon_timeout"]->val_int * SECS_PER_MIN;
+      nextBeaconTimeStamp = now() + cc["beacon_rate"]->val_int;
     else if (cc["fixed_beacon_active"]->val_bool)
-      nextBeaconTimeStamp = now() + cc["fixed_beacon_slow_rate"]->val_int;
+      nextBeaconTimeStamp = now() + cc["fixed_beacon_rate"]->val_int;
 
     APRSMessage msg;
-    String      lat;
-    String      lng;
-    String      dao;
+    String      lat, lng, dao;
 
+    // set callsign, destination and path
     msg.setSource(cc["callsign"]->val_string);
     msg.setDestination(cc["destination"]->val_string);
     msg.setPath(cc["path"]->val_string);
@@ -341,6 +342,7 @@ void loop() {
       String course    = padding(course_int, 3);
       course_and_speed = course + "/" + speed;
     }
+
     if (speed_int == 0) {
       /* speed is 0.
          we send 3 packets with speed zero (so our friends know we stand still).
@@ -355,11 +357,11 @@ void loop() {
       speed_zero_sent = 0;
     }
 
-    // Build the APRS message
+    // Build the APRS message that we're sending
     String aprsmsg;
     aprsmsg = "!" + lat + cc["beacon_overlay"]->val_string + lng + cc["beacon_symbol"]->val_string + course_and_speed + alt;
     // message_text every 10's packet (i.e. if we have beacon rate 1min at high
-    // speed -> every 10min). May be enforced above (at expirey of smart beacon
+    // speed -> every 10min). May be enforced above (at expiry of smart beacon
     // rate (i.e. every 30min), or every third packet on static rate (i.e.
     // static rate 10 -> every third packet)
     if (!(rate_limit_message_text++ % 10)) {
@@ -391,7 +393,7 @@ void loop() {
                   2000);
 
 
-    // "push to talk " if needed
+    // "push to talk " anticipated by ptt_start_delay, if needed
     if (cc["ptt_active"]->val_bool) {
       digitalWrite(cc["ptt_io_pin"]->val_int, cc["ptt_reverse"]->val_bool ? LOW : HIGH);
       delay(cc["ptt_start_delay"]->val_long);
@@ -422,7 +424,7 @@ void loop() {
     lastTXLatString = lat;
     lastTXLngString = lng;
 
-    // release "push to talk" if needed
+    // release "push to talk" after ptt_end_delay if needed
     if (cc["ptt_active"]->val_bool) {
       delay(cc["ptt_end_delay"]->val_long);
       digitalWrite(cc["ptt_io_pin"]->val_int, cc["ptt_reverse"]->val_bool ? HIGH : LOW);
@@ -604,21 +606,6 @@ int DecWidePath(String &ii){
   ii = String(wide) + "-" + String(nn);
   return nn;
 }
-
-/*
-void load_config() {
-  ConfigurationManagement confmg("/tracker.json");
-  Config = confmg.readConfiguration();
-  if (cc["callsign"]->val_string == "NOCALL-10") {
-    logPrintlnA("You have to change your settings in 'data/tracker.json' and "
-                "upload it via \"Upload File System image\"!");
-    show_display("ERROR", "You have to change your settings in 'data/tracker.json' and "
-                          "upload it via \"Upload File System image\"!");
-    while (true) {
-    }
-  }
-}
-*/
 
 void setup_lora() {
   logPrintlnI("Set SPI pins!");
