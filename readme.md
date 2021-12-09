@@ -6,12 +6,13 @@
 <table>
   <tr>
     <td>This is a LoRa APRS Tracker with Access Point for real time configuration. <br/>
-    Its main use is to send a periodic beacon containing:
-- callsign
-- GPS or fixed coordinates
-- Altitude
-- Battery voltage and current
-</td>
+    Its main use is to send a periodic beacon containing: 
+      <ul>
+        <li>callsign</li>
+        <li>GPS or fixed coordinates</li>
+        , , Altitude, Battery voltage and current
+      </ul>
+    </td>
     <td><img src="images/my_LILYGO_TBEAM.jpg" width="600"></td>
   </tr>
 </table>
