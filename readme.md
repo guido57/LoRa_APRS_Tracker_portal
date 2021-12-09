@@ -12,8 +12,10 @@
         <li>Altitude</li>
         <li>Battery voltage and current</li>
       </ul>
-      Any received LoRa APRS packet, including the one repeated by a local digipeater, is displayed in the (very) small 0.96" display.
-      <img src="images/display.png" width="100" />
+      Any received LoRa APRS packet, <bt/>
+      including the one repeated by a local digipeater,<br/>
+      is displayed in the (very) small 0.96" display.<br/>
+      <img src="images/display.png" width="300" />
 
     
     </td>
