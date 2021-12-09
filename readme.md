@@ -2,7 +2,7 @@
 
 This is a LoRa APRS Tracker with Access Point for real time configuration.
 
-<img src="images/my_LILYGO_TBEAM.jpg" width="800">
+<img src="images/my_LILYGO_TBEAM.jpg" width="600">
 
 
 Its main use is to send a periodic beacon containing:
