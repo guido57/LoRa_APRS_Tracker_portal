@@ -13,7 +13,7 @@
         <li>Battery voltage and current</li>
       </ul>
       Any received LoRa APRS packet, including the one repeated by a local digipeater, is displayed in the (very) small 0.96" display.
-      ![TTGO T-Beam](images/display.png)
+      <img src="images/display.png" width="100" />
 
     
     </td>
