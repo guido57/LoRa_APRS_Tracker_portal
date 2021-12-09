@@ -78,16 +78,16 @@ Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V!
 ### Partlist
 <ul>
   <li>
-    <a href="https://www.amazon.it/gp/product/B093GQGJCV/">ESP32</a>
+    <a href="https://www.amazon.it/gp/product/B093GQGJCV/">ESP32 microcontroller</a>
   </li>
 <li>
-    <a src="https://www.amazon.it/gp/product/B088LR3488/">NEO6M</a>
+    <a href="https://www.amazon.it/gp/product/B088LR3488/">NEO6M GPS</a>
 </li>
 <li>
-    <a src="https://www.amazon.it/gp/product/B093GQGJCV/">SX1278</a>
+    <a href="https://www.amazon.it/gp/product/B07RD2JV7Y/">LoRa 432MHz transceiver</a>
 </li>
 <li>
-    <a src="https://www.amazon.it/gp/product/B093GQGJCV/">SSD1306</a>
+    <a href="https://www.amazon.it/ARCELI-pollici-SSD1306-auto-luminoso-Raspberry/dp/B07J2QWF43/" >OLED 0.96"</a>
 </li>
 </ul>  
 
