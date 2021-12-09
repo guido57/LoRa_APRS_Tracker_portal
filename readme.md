@@ -1,18 +1,16 @@
 # Overview
 
-
-
-
 <table>
   <tr>
     <td>
-      This is a LoRa APRS Tracker<br/>
-      it features an Access Point for real time configuration <br/>
+      This is a LoRa APRS Tracker<br/><br/>
+      it features an Access Point for real time configuration <br/><br/>
       Its main use is to send a periodic beacon containing: 
       <ul>
         <li>callsign</li>
         <li>GPS or fixed coordinates</li>
-        , , Altitude, Battery voltage and current
+        <li>Altitude</li>
+        <li>Battery voltage and current</li>
       </ul>
     </td>
     <td><img src="images/my_LILYGO_TBEAM.jpg" width="600"></td>
