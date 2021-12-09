@@ -46,13 +46,22 @@ Keep in mind: you need a 433MHz version!
 * Or you can build your own. See below
 
 
-
+<td></td>
 ## LILYGO TTGO TBEAM
-Front view
-<img src="images/LILYGO-TBEAM.png" width="400">
 
-Rear view
-<img src="images/LILYGO-TBEAM-GPS-antenna.png" width="400">
+<table>
+  <tr>
+    <td>Front view</td><td>Rear view</td>
+  </tr>
+  <tr>
+    <td><img src="images/LILYGO-TBEAM.png" width="400">
+  </td>
+  <td>
+    <img src="images/LILYGO-TBEAM-GPS-antenna.png" width="400">
+  </td>
+  </tr>
+  
+</table>
 
 Please note that I changed the GPS antenna with a most performing one.
 
