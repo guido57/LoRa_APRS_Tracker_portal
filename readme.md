@@ -43,12 +43,11 @@ Please note that I changed the GPS antenna with a most performing one.
 
 The original antenna
 
-![TTGO T-Beam](images/original_GPS_antenna.png)
+<img src="images/original_GPS_antenna.png" width="400">
 
 The most performing antenna
 
-![TTGO T-Beam](images/larger_GPS_antenna.png)
-
+<img src="images/larger_GPS_antenna.png" width="400">
 
 # Compiling and configuration
 
