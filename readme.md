@@ -63,15 +63,39 @@ Keep in mind: you need a 433MHz version!
   
 </table>
 
-Please note that I changed the GPS antenna with a most performing one.
+### Please note that I changed the GPS antenna with a most performing one.
 
-The original antenna
+<table>
+  <tr>
+    <td>The original antenna</td><td>The most performing antenna</td><td><a href="https://www.amazon.it/gp/product/B01BML4XMQ/">the amplified GPS magnetic antenna with a 3m cable</a> very useful when the tracker is inside a vehicle. 
+    </td>
+  </tr>
+  <tr>
+    <td><img src="images/original_GPS_antenna.png" width="300">
+  </td>
+  <td>
+    <img src="images/LILYGO-TBEAM-GPS-antenna.png" width="300">
+  </td>
+  <td>
+    <img src="images/amplified gps antenna.png" width="300">
+  </td>
+  </tr>
+  
+</table>
+
+
+
+### 
 
 <img src="images/original_GPS_antenna.png" width="400">
 
-The most performing antenna
+### 
 
-<img src="images/larger_GPS_antenna.png" width="400">
+### or the amplified antenna
+
+
+
+
 
 ## ... or you can build your own board
 <table>
@@ -84,9 +108,6 @@ The most performing antenna
     </td>
   </tr>
 </table>  
-Please, note that here I'm sporting an 
-<a href="https://www.amazon.it/gp/product/B01BML4XMQ/"> amplified GPS magnetic antenna with a 3m cable</a>
-very useful when the tracker is inside a vehicle. <br/> 
 Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V! 
 
 # Compiling and configuration
