@@ -75,6 +75,23 @@ Keep in mind: you need a 433MHz version!
 </table>  
 Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V! 
 
+Partlist
+<ul>
+  <li>
+    <a src="https://www.amazon.it/gp/product/B093GQGJCV/">ESP32</a>
+  </li>
+<li>
+    <a src="https://www.amazon.it/gp/product/B093GQGJCV/"<NEO6M</a>
+</li>
+<li>
+    <a src="https://www.amazon.it/gp/product/B093GQGJCV/">SX1278</a>
+</li>
+<li>
+    <a src="https://www.amazon.it/gp/product/B093GQGJCV/">SSD1306</a>
+</li>
+
+</ul>  
+
 ### Please note that small original GPS antenna with a most performing one.
 
 <table>
