@@ -65,11 +65,16 @@ The most performing antenna
 <img src="images/larger_GPS_antenna.png" width="400">
 
 ## YOU CAN BUILD YOUR OWN BOARD
-
-<img src="images/my_esp32_lora_aprs_tracker_portal.jpg" width="400">
-<img src="images/MyLoRa_APRS_GPS_schematic.png" width="400">
-
-
+<table>
+  <tr>
+    <td>
+      <img src="images/my_esp32_lora_aprs_tracker_portal.jpg" width="400">
+    </td>
+    <td>
+    <img src="images/MyLoRa_APRS_GPS_schematic.png" width="400">
+    </td>
+  </tr>
+</table>  
 
 # Compiling and configuration
 
