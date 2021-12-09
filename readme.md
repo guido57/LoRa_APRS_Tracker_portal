@@ -45,12 +45,23 @@ Keep in mind: you need a 433MHz version!
 
 * Or you can build your own. See below
 
-## LILYGO TTGO
-Front view
-<img src="images/LILYGO-TBEAM.png" width="400">
 
-Rear view
-<img src="images/LILYGO-TBEAM-GPS-antenna.png" width="400">
+<td></td>
+## LILYGO TTGO TBEAM
+
+<table>
+  <tr>
+    <td>Front view</td><td>Rear view</td>
+  </tr>
+  <tr>
+    <td><img src="images/LILYGO-TBEAM.png" width="400">
+  </td>
+  <td>
+    <img src="images/LILYGO-TBEAM-GPS-antenna.png" width="400">
+  </td>
+  </tr>
+  
+</table>
 
 Please note that I changed the GPS antenna with a most performing one.
 
@@ -61,6 +72,22 @@ The original antenna
 The most performing antenna
 
 <img src="images/larger_GPS_antenna.png" width="400">
+
+## ... or you can build your own board
+<table>
+  <tr>
+    <td>
+      <img src="images/my_esp32_lora_aprs_tracker_portal.jpg" width="400">
+    </td>
+    <td>
+    <img src="images/MyLoRa_APRS_GPS_schematic.png" width="400">
+    </td>
+  </tr>
+</table>  
+Please, note that here I'm sporting an 
+<a href="https://www.amazon.it/gp/product/B01BML4XMQ/"> amplified GPS magnetic antenna with a 3m cable</a>
+very useful when the tracker is inside a vehicle. <br/> 
+Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V! 
 
 # Compiling and configuration
 
