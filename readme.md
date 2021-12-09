@@ -64,7 +64,7 @@ The most performing antenna
 
 <img src="images/larger_GPS_antenna.png" width="400">
 
-## YOU CAN BUILD YOUR OWN BOARD
+## ... Or you can build your own board
 <table>
   <tr>
     <td>
