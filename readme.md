@@ -67,7 +67,7 @@ Keep in mind: you need a 433MHz version!
 
 <table>
   <tr>
-    <td>The original antenna</td><td>The most performing antenna</td><td><a href="https://www.amazon.it/gp/product/B01BML4XMQ/">the amplified GPS magnetic antenna with a 3m cable</a> very useful when the tracker is inside a vehicle. 
+    <td>The original antenna</td><td>The most performing antenna</td><td><a href="https://www.amazon.it/gp/product/B01BML4XMQ/">the amplified GPS magnetic antenna with a 3m cable</a> <br/>very useful when the tracker is inside a vehicle. 
     </td>
   </tr>
   <tr>
