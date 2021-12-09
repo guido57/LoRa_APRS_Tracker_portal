@@ -1,11 +1,13 @@
 # Overview
 
-This is a LoRa APRS Tracker with Access Point for real time configuration.
 
-<img src="images/my_LILYGO_TBEAM.jpg" width="600">
+
 
 <table>
-  <tr><td>ciao</td><td>miao</td></tr>
+  <tr>
+    <td>This is a LoRa APRS Tracker with Access Point for real time configuration.</td>
+    <td><img src="images/my_LILYGO_TBEAM.jpg" width="600"></td>
+  </tr>
 </table>
 
 Its main use is to send a periodic beacon containing:
