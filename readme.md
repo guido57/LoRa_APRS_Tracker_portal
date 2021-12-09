@@ -5,8 +5,10 @@
 
 <table>
   <tr>
-    <td>This is a LoRa APRS Tracker with Access Point for real time configuration. <br/>
-    Its main use is to send a periodic beacon containing: 
+    <td>
+      This is a LoRa APRS Tracker<br/>
+      it features an Access Point for real time configuration <br/>
+      Its main use is to send a periodic beacon containing: 
       <ul>
         <li>callsign</li>
         <li>GPS or fixed coordinates</li>
