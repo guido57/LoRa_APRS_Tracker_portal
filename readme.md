@@ -77,7 +77,7 @@ Keep in mind: you need a 433MHz version!
     <img src="images/LILYGO-TBEAM-GPS-antenna.png" width="300">
   </td>
   <td>
-    <img src="images/amplified gps antenna.png" width="300">
+    <img src="images/amplified_GPS_antenna.png" width="300">
   </td>
   </tr>
   
