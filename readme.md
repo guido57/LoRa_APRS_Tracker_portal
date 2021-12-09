@@ -83,20 +83,6 @@ Keep in mind: you need a 433MHz version!
   
 </table>
 
-
-
-### 
-
-<img src="images/original_GPS_antenna.png" width="400">
-
-### 
-
-### or the amplified antenna
-
-
-
-
-
 ## ... or you can build your own board
 <table>
   <tr>
