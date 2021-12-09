@@ -1,14 +1,27 @@
 # Overview
 
-This is a LoRa APRS Tracker with Access Point for real time configuration.
-Its main use is to send a periodic beacon containing:
-- callsign
-- GPS or fixed coordinates
-- Altitude
-- Battery voltage and current
+<table>
+  <tr>
+    <td>
+      This is a LoRa APRS Tracker<br/><br/>
+      it features an Access Point for real time configuration <br/><br/>
+      Its main use is to send a periodic beacon containing: 
+      <ul>
+        <li>callsign</li>
+        <li>GPS or fixed coordinates</li>
+        <li>Altitude</li>
+        <li>Battery voltage and current</li>
+      </ul>
+      Any received LoRa APRS packet, <bt/>
+      including the one repeated by a local digipeater,<br/>
+      is displayed in the (very) small 0.96" display.<br/>
+      <img src="images/display.png" width="300" />
+    </td>
+    <td><img src="images/my_LILYGO_TBEAM.jpg" width="600"></td>
+  </tr>
+</table>
 
-Any received LoRa APRS packet, including the one repeated by a local digipeater, is displayed in the (very) small display.
-![TTGO T-Beam](images/display.png)
+
 
 ## About the fork 
 
@@ -43,12 +56,11 @@ Please note that I changed the GPS antenna with a most performing one.
 
 The original antenna
 
-![TTGO T-Beam](images/original_GPS_antenna.png)
+<img src="images/original_GPS_antenna.png" width="400">
 
 The most performing antenna
 
-![TTGO T-Beam](images/larger_GPS_antenna.png)
-
+<img src="images/larger_GPS_antenna.png" width="400">
 
 # Compiling and configuration
 
