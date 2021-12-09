@@ -75,7 +75,7 @@ The most performing antenna
     </td>
   </tr>
 </table>  
-Please, note that here I'm sporting an amplified [GPS magnetic antenna with a 3m cable](https://www.amazon.it/gp/product/B01BML4XMQ/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&psc=1), very useful when the tracker is inside a vehicle. <br/> 
+Please, note that here I'm sporting an amplified ![GPS magnetic antenna with a 3m cable](https://www.amazon.it/gp/product/B01BML4XMQ/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&psc=1), very useful when the tracker is inside a vehicle. <br/> 
 Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V! 
 
 # Compiling and configuration
