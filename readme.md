@@ -96,7 +96,7 @@ Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V!
 </table>
 
 
-# Compiling and configuration
+# Compiling and configuring
 
 
 # How to compile
