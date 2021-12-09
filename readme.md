@@ -47,7 +47,7 @@ Keep in mind: you need a 433MHz version!
 
 
 
-## LILYGO TTGO
+## LILYGO TTGO TBEAM
 Front view
 <img src="images/LILYGO-TBEAM.png" width="400">
 
@@ -64,7 +64,7 @@ The most performing antenna
 
 <img src="images/larger_GPS_antenna.png" width="400">
 
-## ... Or you can build your own board
+## ... or you can build your own board
 <table>
   <tr>
     <td>
@@ -75,6 +75,8 @@ The most performing antenna
     </td>
   </tr>
 </table>  
+Please, note that here I'm sporting an amplified GPS magnetic antenna with a 3m cable, very useful when the tracker is inside a vehicle.  
+Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V! 
 
 # Compiling and configuration
 
