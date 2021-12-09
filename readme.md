@@ -62,7 +62,20 @@ Keep in mind: you need a 433MHz version!
   
 </table>
 
-### Please note that I changed the GPS antenna with a most performing one.
+## ... or you can build your own board
+<table>
+  <tr>
+    <td>
+      <img src="images/my_esp32_lora_aprs_tracker_portal.jpg" width="400">
+    </td>
+    <td>
+    <img src="images/MyLoRa_APRS_GPS_schematic.png" width="400">
+    </td>
+  </tr>
+</table>  
+Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V! 
+
+### Please note that small original GPS antenna with a most performing one.
 
 <table>
   <tr>
@@ -82,18 +95,6 @@ Keep in mind: you need a 433MHz version!
   
 </table>
 
-## ... or you can build your own board
-<table>
-  <tr>
-    <td>
-      <img src="images/my_esp32_lora_aprs_tracker_portal.jpg" width="400">
-    </td>
-    <td>
-    <img src="images/MyLoRa_APRS_GPS_schematic.png" width="400">
-    </td>
-  </tr>
-</table>  
-Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V! 
 
 # Compiling and configuration
 
