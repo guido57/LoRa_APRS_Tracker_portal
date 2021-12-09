@@ -45,6 +45,8 @@ Keep in mind: you need a 433MHz version!
 
 * Or you can build your own. See below
 
+
+
 ## LILYGO TTGO
 Front view
 <img src="images/LILYGO-TBEAM.png" width="400">
@@ -61,6 +63,8 @@ The original antenna
 The most performing antenna
 
 <img src="images/larger_GPS_antenna.png" width="400">
+
+
 
 ## YOU CAN BUILD YOUR OWN BOARD
 
