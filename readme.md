@@ -157,5 +157,7 @@ activate only one!!!
 
 ## PTT (Push To Talk)
 * These are the settings for an external transmitter connected by its Push To Talk 
-* Pleas note that you can save the settings or restore default settings
+
 ![TTGO T-Beam](images/PTT_settings_save.png)
+
+* Please note that you can save the settings or restore default settings
