@@ -160,4 +160,4 @@ activate only one!!!
 
 ![TTGO T-Beam](images/PTT_settings_save.png)
 
-* Please note that you can save the settings or restore default settings
+* You can save the settings or restore default settings
