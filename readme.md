@@ -2,18 +2,18 @@
 
 <table>
   <tr>
-    <td>
-      This is a LoRa APRS Tracker<br/><br/>
-      it features an Access Point for real time configuration <br/><br/>
+    <td width="300px">
+      This is a LoRa APRS Tracker working on the 433 MHz band.<br/>
+      It features an Access Point for real time configuration.<br/>
       Its main use is to send a periodic beacon containing: 
       <ul>
-        <li>callsign</li>
+        <li>Callsign</li>
         <li>GPS or fixed coordinates</li>
         <li>Altitude</li>
         <li>Battery voltage and current</li>
       </ul>
-      Any received LoRa APRS packet, <bt/>
-      including the one repeated by a local digipeater,<br/>
+      Any received LoRa APRS packet, including
+      the one repeated by a local digipeater,
       is displayed in the (very) small 0.96" display.<br/>
       <img src="images/display.png" width="300" />
     </td>
@@ -23,11 +23,13 @@
 
 
 
-## About the fork 
+### About the fork 
 
 This LoRa APRS Tracker is derived from (https://github.com/lora-aprs/LoRa_APRS_Tracker) by [peterus](https://github.com/lora-aprs/LoRa_APRS_Tracker/commits?author=peterus)
 
-I added an Access Point and Captive Portal for easy configuration. 
+I added: 
+- an Access Point and Captive Portal for easy configuration 
+- many comments to the source code to keep it more readable
 
 # Block diagram
 ![TTGO T-Beam](images/block_diagram.png)
@@ -40,14 +42,13 @@ You can use one of the Lora32 boards:
 The original software is designed for it, also, but I never tried.
 
 * TTGO T-Beam V1 (433MHz SX1278)
-This boards cost around 35 Euros and includes a small 0.96" display
+This board costs around 35 Euros and includes a small 0.96" display
 Keep in mind: you need a 433MHz version!
 
 * Or you can build your own. See below
-
-
 <td></td>
-## LILYGO TTGO TBEAM
+
+## You can use a LILYGO TTGO TBEAM
 
 <table>
   <tr>
@@ -63,40 +64,6 @@ Keep in mind: you need a 433MHz version!
   
 </table>
 
-### Please note that I changed the GPS antenna with a most performing one.
-
-<table>
-  <tr>
-    <td>The original antenna</td><td>The most performing antenna</td><td><a href="https://www.amazon.it/gp/product/B01BML4XMQ/">the amplified GPS magnetic antenna with a 3m cable</a> very useful when the tracker is inside a vehicle. 
-    </td>
-  </tr>
-  <tr>
-    <td><img src="images/original_GPS_antenna.png" width="300">
-  </td>
-  <td>
-    <img src="images/LILYGO-TBEAM-GPS-antenna.png" width="300">
-  </td>
-  <td>
-    <img src="images/amplified gps antenna.png" width="300">
-  </td>
-  </tr>
-  
-</table>
-
-
-
-### 
-
-<img src="images/original_GPS_antenna.png" width="400">
-
-### 
-
-### or the amplified antenna
-
-
-
-
-
 ## ... or you can build your own board
 <table>
   <tr>
@@ -108,9 +75,46 @@ Keep in mind: you need a 433MHz version!
     </td>
   </tr>
 </table>  
-Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V! 
+ 
 
-# Compiling and configuration
+### Partlist
+<ul>
+  <li>
+    <a href="https://www.amazon.it/gp/product/B093GQGJCV/">ESP32 microcontroller</a>
+  </li>
+<li>
+    <a href="https://www.amazon.it/gp/product/B088LR3488/">NEO6M GPS</a>
+</li>
+<li>
+    <a href="https://www.amazon.it/gp/product/B07RD2JV7Y/">LoRa 432MHz transceiver</a>
+</li>
+<li>
+    <a href="https://www.amazon.it/ARCELI-pollici-SSD1306-auto-luminoso-Raspberry/dp/B07J2QWF43/" >OLED 0.96"</a>
+</li>
+</ul>  
+
+### Please note that small original GPS antenna with a most performing one.
+
+<table>
+  <tr>
+    <td>The original antenna</td><td>The most performing antenna</td><td width="300px"><a href="https://www.amazon.it/gp/product/B01BML4XMQ/">The amplified GPS magnetic antenna with a 3m cable</a> <br/>very useful when the tracker is inside a vehicle. Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V by the same antenna cable!
+    </td>
+  </tr>
+  <tr>
+    <td><img src="images/original_GPS_antenna.png" width="300">
+  </td>
+  <td>
+    <img src="images/LILYGO-TBEAM-GPS-antenna.png" width="300">
+  </td>
+  <td>
+    <img src="images/amplified_GPS_antenna.png" width="300">
+  </td>
+  </tr>
+  
+</table>
+
+
+# Compiling and configuring
 
 
 # How to compile
