@@ -3,17 +3,17 @@
 <table>
   <tr>
     <td>
-      This is a LoRa APRS Tracker<br/><br/>
-      it features an Access Point for real time configuration <br/><br/>
+      This is a LoRa APRS Tracker working on the 432 MHz band
+      It features an Access Point for real time configuration <br/><br/>
       Its main use is to send a periodic beacon containing: 
       <ul>
-        <li>callsign</li>
+        <li>Callsign</li>
         <li>GPS or fixed coordinates</li>
         <li>Altitude</li>
         <li>Battery voltage and current</li>
       </ul>
-      Any received LoRa APRS packet, <bt/>
-      including the one repeated by a local digipeater,<br/>
+      Any received LoRa APRS packet, including<br/>
+      the one repeated by a local digipeater,<br/>
       is displayed in the (very) small 0.96" display.<br/>
       <img src="images/display.png" width="300" />
     </td>
@@ -23,11 +23,13 @@
 
 
 
-## About the fork 
+### About the fork 
 
 This LoRa APRS Tracker is derived from (https://github.com/lora-aprs/LoRa_APRS_Tracker) by [peterus](https://github.com/lora-aprs/LoRa_APRS_Tracker/commits?author=peterus)
 
-I added an Access Point and Captive Portal for easy configuration. 
+I added: 
+- an Access Point and Captive Portal for easy configuration 
+- many comments to the source code to keep it more readable
 
 # Block diagram
 ![TTGO T-Beam](images/block_diagram.png)
