@@ -3,7 +3,7 @@
 <table>
   <tr>
     <td width="300px">
-      This is a LoRa APRS Tracker working on the 432 MHz band.<br/>
+      This is a LoRa APRS Tracker working on the 433 MHz band.<br/>
       It features an Access Point for real time configuration.<br/>
       Its main use is to send a periodic beacon containing: 
       <ul>
@@ -42,7 +42,7 @@ You can use one of the Lora32 boards:
 The original software is designed for it, also, but I never tried.
 
 * TTGO T-Beam V1 (433MHz SX1278)
-This boards cost around 35 Euros and includes a small 0.96" display
+This board costs around 35 Euros and includes a small 0.96" display
 Keep in mind: you need a 433MHz version!
 
 * Or you can build your own. See below
@@ -75,7 +75,7 @@ Keep in mind: you need a 433MHz version!
     </td>
   </tr>
 </table>  
-Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V! 
+ 
 
 ### Partlist
 <ul>
@@ -97,7 +97,7 @@ Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V!
 
 <table>
   <tr>
-    <td>The original antenna</td><td>The most performing antenna</td><td><a href="https://www.amazon.it/gp/product/B01BML4XMQ/">the amplified GPS magnetic antenna with a 3m cable</a> <br/>very useful when the tracker is inside a vehicle. 
+    <td>The original antenna</td><td>The most performing antenna</td><td><a href="https://www.amazon.it/gp/product/B01BML4XMQ/">the amplified GPS magnetic antenna with a 3m cable</a> <br/>very useful when the tracker is inside a vehicle. Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V by the same antenna cable!
     </td>
   </tr>
   <tr>
