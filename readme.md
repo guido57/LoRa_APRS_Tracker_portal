@@ -97,7 +97,7 @@ Keep in mind: you need a 433MHz version!
 
 <table>
   <tr>
-    <td>The original antenna</td><td>The most performing antenna</td><td><a href="https://www.amazon.it/gp/product/B01BML4XMQ/">the amplified GPS magnetic antenna with a 3m cable</a> <br/>very useful when the tracker is inside a vehicle. Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V by the same antenna cable!
+    <td>The original antenna</td><td>The most performing antenna</td><td width="300px"><a href="https://www.amazon.it/gp/product/B01BML4XMQ/">The amplified GPS magnetic antenna with a 3m cable</a> <br/>very useful when the tracker is inside a vehicle. Yes, the TBEAM or the NEO6M breakboard supply the GPS amplifier with 3.3V by the same antenna cable!
     </td>
   </tr>
   <tr>
