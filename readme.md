@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <td>
+    <td width="300px">
       This is a LoRa APRS Tracker working on the 432 MHz band
       It features an Access Point for real time configuration <br/><br/>
       Its main use is to send a periodic beacon containing: 
