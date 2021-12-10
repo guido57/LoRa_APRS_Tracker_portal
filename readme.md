@@ -46,7 +46,7 @@ Keep in mind: you need a 433MHz version!
 * Or you can build your own. See below
 <td></td>
 
-## LILYGO TTGO TBEAM
+## You can use a LILYGO TTGO TBEAM
 
 <table>
   <tr>
