@@ -3,8 +3,8 @@
 <table>
   <tr>
     <td width="300px">
-      This is a LoRa APRS Tracker working on the 432 MHz band
-      It features an Access Point for real time configuration <br/><br/>
+      This is a LoRa APRS Tracker working on the 432 MHz band.<br/>
+      It features an Access Point for real time configuration.<br/>
       Its main use is to send a periodic beacon containing: 
       <ul>
         <li>Callsign</li>
@@ -12,8 +12,8 @@
         <li>Altitude</li>
         <li>Battery voltage and current</li>
       </ul>
-      Any received LoRa APRS packet, including<br/>
-      the one repeated by a local digipeater,<br/>
+      Any received LoRa APRS packet, including
+      the one repeated by a local digipeater,
       is displayed in the (very) small 0.96" display.<br/>
       <img src="images/display.png" width="300" />
     </td>
