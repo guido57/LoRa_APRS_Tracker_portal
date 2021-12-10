@@ -166,7 +166,9 @@ void setup() {
   logPrintlnI("setup done...");
   delay(500);
 }
-
+// -----------------------------------------
+//       loop
+//
 // cppcheck-suppress unusedFunction
 void loop() {
   userButton.tick();
@@ -230,6 +232,16 @@ void loop() {
     }
   }
 
+  // ---------------------------------------------  
+  // fixed beacon case
+  // ---------------------------------------------  
+  if (cc["fixed_beacon_active"]->val_bool) {
+
+    if (nextBeaconTimeStamp <= now()){
+      send_update = true; // It's time to send a LORA Packet
+    }
+  }
+
   static double   lastTxLat       = 0.0;
   static double   lastTxLng       = 0.0;
   static double   lastTxdistance  = 0.0;
@@ -285,13 +297,13 @@ void loop() {
   if (send_update) {
     send_update = false;
 
-    // set the next time the beacon will be sent
+    // set the next time the beacon will be sent. Not faster than 30 seconds
     if (cc["smart_beacon_active"]->val_bool)
-      nextBeaconTimeStamp = now() + cc["smart_beacon_slow_rate"]->val_int;
+      nextBeaconTimeStamp = now() + max( cc["smart_beacon_slow_rate"]->val_int , 30);
     else if (cc["beacon_active"]->val_bool)
-      nextBeaconTimeStamp = now() + cc["beacon_rate"]->val_int;
+      nextBeaconTimeStamp = now() + max( cc["beacon_rate"]->val_int, 30);
     else if (cc["fixed_beacon_active"]->val_bool)
-      nextBeaconTimeStamp = now() + cc["fixed_beacon_rate"]->val_int;
+      nextBeaconTimeStamp = now() + max( cc["fixed_beacon_rate"]->val_int, 30);
 
     APRSMessage msg;
     String      lat, lng, dao;
@@ -438,8 +450,10 @@ void loop() {
     txInterval = (txi == -1) ? txInterval : txi;
   } // end send_update
 
+#ifdef TTGO_T_Beam_V1_0 
   // check if GPS module sends messages and if not, suggest to reset it 
   checkGPS();
+#endif
 
   // check any received packet
   rxLoop();
@@ -447,8 +461,10 @@ void loop() {
 
 
 void checkGPS(){
-   
-  if ((cc["debug"]->val_bool == false) && (millis() > 5000 && gps.charsProcessed() < 10)) {
+
+  if (  (cc["beacon_active"]->val_bool || cc["smart_beacon_active"]->val_bool) &&
+        (cc["debug"]->val_bool == false) && (millis() > 5000 && gps.charsProcessed() < 10)
+     ) {
     logPrintlnE("No GPS frames detected! Try to reset the GPS Chip with this "
                 "firmware: https://github.com/lora-aprs/TTGO-T-Beam_GPS-reset");
   }

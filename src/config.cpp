@@ -12,7 +12,7 @@ namespace Config_ns{
         {"ApPwd", "12345678", "String", "Access Point SSID e.g. 12345678 "},
         {"ApPin", "38", "Int", "Access Point Activation Pin e.g. 38"},
         // Generic        
-        {"callsign", "IW5ALZ-7", "String", "APRS callsign e.g. IW5ALZ-7"},
+        {"callsign", "IW0AAA-7", "String", "APRS callsign e.g. IW0AAA-7"},
         {"destination", "APZMDM", "String", "APRS destination e.g. APZMDM"},
         {"path", "WIDE1-1", "String", "APRS path e.g. WIDE1-1"},
         {"debug", String(false), "Bool", "debug mode e.g. false"},
@@ -37,8 +37,8 @@ namespace Config_ns{
         // fixed_beacon
         {"fixed_beacon_active", String(true), "Bool", "fixed beacon i.e. send at fixed rate and fixed coordinates e.g. false"},
         {"fixed_beacon_rate", "300", "Int","fixed beacon i.e. send every 'rate' seconds e.g. 300"},
-        {"fixed_beacon_lat", "4319.15N", "String", "fixed beacon i.e. fixed latitude e.g. 4319.15N"},
-        {"fixed_beacon_lon", "01120.61E", "String", "fixed beacon i.e. fixed longitude e.g. 01120.61E"},
+        {"fixed_beacon_lat", "4300.00N", "String", "fixed beacon i.e. fixed latitude e.g. 4300.00N"},
+        {"fixed_beacon_lon", "01100.00E", "String", "fixed beacon i.e. fixed longitude e.g. 01100.00E"},
         // lora protocol parameters
         {"lora_frequency_rx", "433775000", "Long", "LoRa Rx frequency in Hertz e.g. 433775000"},
         {"lora_frequency_tx", "433775000", "Long", "LoRa Tx frequency in Hertz e.g. 433775000"},
