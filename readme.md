@@ -93,7 +93,7 @@ Keep in mind: you need a 433MHz version!
 </li>
 </ul>  
 
-### Please note that small original GPS antenna with a most performing one.
+### Please note that I changed the small original GPS antenna with a most performing one.
 
 <table>
   <tr>
