@@ -86,14 +86,28 @@ String Payload::ToString(const String &customComment)
   return txt;
 }
 
+// if any callsign in path is WIDEN-n decrease n until WIDE*  
 bool Payload::Digirepeat(const Callsign &ownCallsign)
 {
+  Serial.printf("Digirepeat: Payload=%s ownCallsign=%s\r\n", this->ToString().c_str(), ownCallsign.ToString().c_str());
   for (int i = 0; i < rptCallsCount_; i++) {   
     if (rptCalls_[i].Digirepeat()) {
+      Serial.printf("Digirepeat: rptCalls_[%d]=%s is Digirepeat\r\n",i, rptCalls_[i].ToString().c_str());
       // if trace was digirepeated insert own callsign
-      if (rptCalls_[i].IsTrace()) {
-        InsertRptCallsign(ownCallsign, i);
+      //if (rptCalls_[i].IsTrace()) {
+      if (     rptCalls_[i].IsWide() 
+            && !this->ToString().startsWith(ownCallsign.ToString()) ) { // the iGate don't declare to repeat itself
+        // Insert qAR  
+        Callsign * cm;
+        cm = new Callsign("qAR");
+        Serial.printf("cm=%s\r\n", cm->ToString().c_str()); 
+        InsertRptCallsign( *cm, rptCallsCount_);            // insert at the end
+
+        // Insert Callsing of this iGate
+        Serial.printf("Digirepeat: rptCalls_[%d]=%s Insert %s\r\n",i, rptCalls_[i].ToString().c_str(), ownCallsign.ToString().c_str());
+        InsertRptCallsign(ownCallsign, rptCallsCount_); // insert at the end
       }
+      
       return true;
     }
   }
@@ -104,7 +118,7 @@ bool Payload::InsertRptCallsign(const Callsign &rptCallsign, int index)
 {
   if (rptCallsCount_ >= RptMaxCount 
     || index >= RptMaxCount 
-    || index >= rptCallsCount_) return false;
+    || index > rptCallsCount_) return false;
 
   for (int i = index; i < rptCallsCount_; i++) {
     rptCalls_[i + 1] = rptCalls_[i];
@@ -184,6 +198,8 @@ LoRA Tracker 433.775MHz/BW125/SF10/CR5            the message
 */
 bool Payload::fromString(const String &textPayload)
 {
+  //Serial.printf("Payload::fromString textPayload=%s\r\n", textPayload.c_str());
+  
   String inputText = textPayload;
   
   int rptIndex = inputText.indexOf('>');
@@ -196,10 +212,12 @@ bool Payload::fromString(const String &textPayload)
   srcCall_ = AX25::Callsign(inputText.substring(0, rptIndex));
   if (!srcCall_.IsValid()) return false;
   String paths = inputText.substring(rptIndex + 1, infoIndex);
+
+  //Serial.printf("Payload::fromString paths=%s\r\n", paths.c_str());
   
   rptCallsCount_ = 0;
   int index = 0;
-  while (rptCallsCount_ <= RptMaxCount) {
+  while (rptCallsCount_ < RptMaxCount) { //GG it was <=
     int nextIndex = paths.indexOf(',', index);
     String pathItem = paths.substring(index, nextIndex == -1 ? paths.length() : nextIndex);
     if (index == 0) {
@@ -207,6 +225,8 @@ bool Payload::fromString(const String &textPayload)
       if (!dstCall_.IsValid()) return false;
     }
     else {
+      //Serial.printf("Payload::fromString rptCallsCount_=%d pathItem=%s\r\n",
+      //   rptCallsCount_, pathItem.c_str());
       rptCalls_[rptCallsCount_] = AX25::Callsign(pathItem);
       if (rptCalls_[rptCallsCount_].IsValid()) {
         rptCallsCount_++;
