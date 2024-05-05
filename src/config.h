@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <default.h>
 #include <entry.h>
+#include <vector>
 
 namespace Config_ns {
 
