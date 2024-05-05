@@ -14,6 +14,9 @@
 #include "pins.h"
 #include "power_management.h"
 #include <ax25_payload.h>
+#include <aprs_is.h>
+#include <digirepeat.h>
+
 
 //Configuration Config;
 
@@ -27,8 +30,12 @@ OneButton       userButton;
 HardwareSerial ss(1);
 TinyGPSPlus    gps;
 
-bool AP = false;
+#ifdef wemos_d1_mini32
+  bool AP = true;
+#else
+  bool AP = false;
 
+#endif
 //void load_config();
 void setup_lora();
 void setup_gps();
@@ -47,7 +54,7 @@ String padding(unsigned int number, unsigned int width);
 int DecWidePath(String & ii);
 void SendLoraPacket(String data);
 String GetHMS();
-bool rxLoop();
+void rxLoop();
 int calcTXinterval();
 void checkGPS();
 
@@ -83,7 +90,7 @@ static void handle_long_press_stop() {
     ;
   else{
     AP = true;
-    CaptivePortalSetup();
+    AccessPointSetup();
   }     
 }
 
@@ -91,15 +98,10 @@ static void handle_long_press_stop() {
 void setup() {
   Serial.begin(115200);
 
-  // original configuration
-  //load_config();
-
   // new web configuration
   cc.Init("/my-config");
   cc.printFile(); 
-  //CaptivePortalSetup();
-
-
+  
 // Service button
 // GPIO38 is connected to the service button on T-TTGO_T_Beam_V1_0
 // but unfortunately it is unaccessible on Wemos D1 Mini32 where I used GPIO14
@@ -147,6 +149,7 @@ void setup() {
   //WiFi.mode(WIFI_OFF);
   btStop();
 
+  
   if (cc["beacon_button_tx"]->val_bool) {
     // attach TX action to user button (defined by BUTTON_PIN)
     userButton.attachClick(handle_tx_click);
@@ -173,8 +176,7 @@ void setup() {
 void loop() {
   userButton.tick();
 
-  if(AP)
-    WiFi_loop();
+  WiFi_loop(AP);
 
   // GPS is connected to Hardware Serial
   while (ss.available() > 0) {
@@ -334,7 +336,12 @@ void loop() {
 
     // Set Altitude
     String alt     = "";
-    int    alt_int = max(-99999, min(999999, (int)gps.altitude.feet()));
+    int    alt_int = 0;
+    if (cc["fixed_beacon_active"]->val_bool){
+      alt_int = cc["fixed_beacon_alt"]->val_int;
+    }else{
+      alt_int = max(-99999, min(999999, (int)gps.altitude.feet()));;
+    }
     if (alt_int < 0) {
       alt = "/A=-" + padding(alt_int * -1, 5);
     } else {
@@ -376,9 +383,10 @@ void loop() {
     // speed -> every 10min). May be enforced above (at expiry of smart beacon
     // rate (i.e. every 30min), or every third packet on static rate (i.e.
     // static rate 10 -> every third packet)
-    if (!(rate_limit_message_text++ % 10)) {
-      aprsmsg += cc["beacon_message"]->val_string;
-    }
+    //if (!(rate_limit_message_text++ % 10)) {
+    aprsmsg += " " + cc["beacon_message"]->val_string + " ";
+    //}
+
     if (BatteryIsConnected) {
       aprsmsg +=  batteryVoltage + "V " + batteryChargeCurrent + "mA";
     }
@@ -424,6 +432,12 @@ void loop() {
     */
     // -----------------------------------------------------------------
     SendLoraPacket(data);
+    
+    // repeat to APRS-IS 
+    APRSMessage raprs;
+    raprs.decode(data);
+    AX25::Payload pl(raprs.encode()); 
+    repeat_to_APRS_IS(pl);
 
     if (cc["smart_beacon_active"]->val_bool) {
       lastTxLat       = gps.location.lat();
@@ -455,8 +469,11 @@ void loop() {
   checkGPS();
 #endif
 
-  // check any received packet
+  // check any received packet from LoRa and repeat it to LoRa and/or to APRS-IS, if necessary
   rxLoop();
+
+  // check any received packet from APRS-IS and repeat it to LoRa, if necessary
+  aprs_is_loop();
 }
 
 
@@ -472,7 +489,7 @@ void checkGPS(){
 
 }
 
-bool rxLoop(){
+void rxLoop(){
 
   // ----------------------------------------------------
   // RECEIVING SECTION
@@ -513,23 +530,16 @@ bool rxLoop(){
             GetHMS(),  
         2000);
 
-    if(cc["digipeater"]->val_bool && DecWidePath(path) >= 0){
-      raprs.setPath(path);
-      // repeat
-      logPrintlnI("Repeating:");
-      String rd = raprs.encode();
-      logPrintlnI(rd);
-      show_display("RP " + raprs.getSource(), 
-        "> " + raprs.getDestination() + ", " + raprs.getPath(),
-        raprs.getLatitude() + " " + raprs.getLongitude(),
-               2000);
-      SendLoraPacket(rd);
-      return true;
-    };
-    //digitalWrite(BUILTIN_LED, LOW); // turn off the LED
+
+    // ----------------------------------------------------
+    // REPEATING SECTION
+    // ----------------------------------------------------
+    repeat_to_APRS_IS(*pl);
+
+    repeat_to_LoRa(*pl);
+    
   }
-  return false;
- 
+
 }
 
 
@@ -583,13 +593,14 @@ String GetHMS() {
 
 void SendLoraPacket(String _data){
     // Set the AX25 payload, to encode Source and Dest
+    //Serial.printf("Sending to LoRa %s\r\n",_data.c_str());
     AX25::Payload payload(_data);
 #define MAXBUF 200
     byte buf[MAXBUF];
     // Encode Source and Dest
     int bytesWritten = payload.ToBinary(buf, sizeof(buf));
     if (bytesWritten <= 0) {
-      Serial.println("Failed to encode payload");
+      Serial.printf("Failed to encode payload %s\r\n",_data.c_str());
     } else {
       // limit to MAXBUF if necessary
       bytesWritten = MAXBUF < bytesWritten ? MAXBUF : bytesWritten;
@@ -599,8 +610,9 @@ void SendLoraPacket(String _data){
         // Serial.printf(" %c ",b2b);
         LoRa.write(b2b);
       };
+      LoRa.endPacket();
     }
-    LoRa.endPacket();
+    
 }
 
 // Decrement the WIDEM-N path
@@ -619,7 +631,7 @@ int DecWidePath(String &ii){
   if(nn>0){
      nn--;
   }
-  ii = String(wide) + "-" + String(nn);
+  ii = nn==0 ? String(wide) + "*" : String(wide) + "-" + String(nn);
   return nn;
 }
 
