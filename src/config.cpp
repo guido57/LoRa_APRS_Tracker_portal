@@ -10,23 +10,36 @@ namespace Config_ns{
         // Access Point
         {"ApSsid", "ESP32_APRS", "String", "Access Point SSID e.g. ESP32_APRS "},
         {"ApPwd", "12345678", "String", "Access Point SSID e.g. 12345678 "},
-        {"ApPin", "38", "Int", "Access Point Activation Pin e.g. 38"},
-        // Generic        
+        // WiFi
+        {"WiFiSsid", "local_hotspot", "String", "WiFi SSID e.g. local_hotspot"},
+        {"WiFiPwd", "local_hotspot_pwd", "String", "WiFi password e.g. local_hotspot_pwd"},
+        {"WiFiEnabled", "false", "Bool", "WiFi enabled e.g. false"},
+        // APRS
         {"callsign", "IW0AAA-7", "String", "APRS callsign e.g. IW0AAA-7"},
         {"destination", "APZMDM", "String", "APRS destination e.g. APZMDM"},
         {"path", "WIDE1-1", "String", "APRS path e.g. WIDE1-1"},
-        {"debug", String(false), "Bool", "debug mode e.g. false"},
-        {"enhance_precision", String(false), "Bool", "enhanced precision mode e.g. false"},
-        {"digipeater", String(false), "Bool", "digipeater repeating any incoming message e.g. false"},
+        // APRS-IS
+        {"APRS-IS_active", "false", "Bool", "APRS-IS is active i.e. connect to APRS-IS e.g. false"},
+        {"APRS-IS_persistent", "false", "Bool", "APRS-IS is persistently connected e.g. false"},
+        {"APRS-IS_server", "rotate.aprs2.net", "String", "APRS-IS server e.g. rotate.aprs2.net"},
+        {"APRS-IS_port", "14580", "Long", "APRS-IS server port e.g. 14580"},
+        {"APRS-IS_user", "IW0AAA-7", "String", "APRS-IS user e.g. IW0AAA-7"},
+        {"APRS-IS_pwd", "my_password", "String", "APRS-IS password e.g. my_password"},
+        {"APRS-IS_version", "LoRa_APRS_iGate by IW0AAA", "String", "Software name and version e.g. LoRa_APRS_iGate by IW0AAA"},
+        {"APRS-IS_filter", "r/43.0/11.0/20", "String", "APRS-IS filter e.g. r/43.0/11.0/20"},
+        // Generic        
+        {"debug", "false", "Bool", "debug mode e.g. false"},
+        {"enhance_precision", "false", "Bool", "enhanced precision mode e.g. false"},
+        {"digipeater", "false", "Bool", "digipeater repeating any incoming message e.g. false"},
         // beacon    
-        {"beacon_active", String(true), "Bool", "beacon is active i.e. send a message every 'timeout' minutes  e.g. true"},
+        {"beacon_active", "false", "Bool", "beacon is active i.e. send a message every 'timeout' minutes  e.g. true"},
         {"beacon_message", "LoRa Tracker", "String", "beacon text message e.g. LoRa Tracker"},
         {"beacon_rate", "60", "Int", "beacon sends at beacon_rate seconds e.g. 60"},
-        {"beacon_button_tx", String(true), "Bool", "beacon TX button enabled or not e.g. true"},
+        {"beacon_button_tx", "true", "Bool", "beacon TX button enabled or not e.g. true"},
         {"beacon_symbol", "[", "String", "beacon symbol table to be used e.g. ["},
         {"beacon_overlay", "/", "String", "beacon symbol overlay e.g. /"},
         // smart_beacon
-        {"smart_beacon_active", String(true), "Bool", "smart beacon is active i.e. send at different rates according to speed e.g. false"},
+        {"smart_beacon_active", "false", "Bool", "smart beacon is active i.e. send at different rates according to speed e.g. false"},
         {"smart_beacon_slow_rate", "300", "Int","smart beacon sends every 'slow_rate' seconds if speed <= slow_speed e.g. 300"},
         {"smart_beacon_slow_speed", "10", "Int","smart beacon sends at 'slow_rate' seconds when speed <= slow_speed in Km/h e.g. 10"},
         {"smart_beacon_fast_rate", "60", "Int","smart beacon sends at 'fast_rate' seconds when speed>=fast_speed e.g. 60"},
@@ -35,23 +48,24 @@ namespace Config_ns{
         {"smart_beacon_min_bcn","15", "Int","smart beacon period of turn_min evaluation in seconds e.g. 15"},
         {"smart_beacon_min_tx_dist","100", "Int","smart beacon distance from the last tx position in meters e.g. 100"},
         // fixed_beacon
-        {"fixed_beacon_active", String(true), "Bool", "fixed beacon i.e. send at fixed rate and fixed coordinates e.g. false"},
+        {"fixed_beacon_active", "true", "Bool", "fixed beacon i.e. send at fixed rate and fixed coordinates e.g. false"},
         {"fixed_beacon_rate", "300", "Int","fixed beacon i.e. send every 'rate' seconds e.g. 300"},
         {"fixed_beacon_lat", "4300.00N", "String", "fixed beacon i.e. fixed latitude e.g. 4300.00N"},
         {"fixed_beacon_lon", "01100.00E", "String", "fixed beacon i.e. fixed longitude e.g. 01100.00E"},
+        {"fixed_beacon_alt", "990", "Int", "fixed beacon altitude in feet e.g. 990"},
         // lora protocol parameters
         {"lora_frequency_rx", "433775000", "Long", "LoRa Rx frequency in Hertz e.g. 433775000"},
         {"lora_frequency_tx", "433775000", "Long", "LoRa Tx frequency in Hertz e.g. 433775000"},
         {"lora_power", "20", "Int", "LoRa Tx Power in dBm e.g. 20"},
         {"lora_spreading_factor", "10", "Int", "LoRa Spread Spectrum factor e.g. 10"},
         {"lora_signal_bandwith", "125000", "Long", "LoRa Signal Bandwith in Hertz e.g. 125000"},
-        {"lora_coding_rate", "5", "Int", "LoRa Coding Rate in Hertz e.g. 5125000"},
+        {"lora_coding_rate", "5", "Int", "LoRa Coding Rate e.g. 5"},
         // PTT 
-        {"ptt_active", String(false), "Bool", "ptt active i.e. rig transmits when io_pin goes high e.g. false"},
+        {"ptt_active", "false", "Bool", "ptt active i.e. rig transmits when io_pin goes high e.g. false"},
         {"ptt_io_pin", "4", "Int", "ptt GPIO pin e.g. 4"},
         {"ptt_start_delay", "0", "Long", "ptt start delay i.e. send after 'start_delay' msecs e.g. 0"},
         {"ptt_end_delay", "0", "Long", "ptt end delay i.e. stop transmitting after 'end_delay' msecs e.g. 0"},
-        {"ptt_reverse", String(false), "Bool", "ptt reverse logic e.g. false"}
+        {"ptt_reverse", "false", "Bool", "ptt reverse logic e.g. false"}
     };
 
     void ConfigClass::Init(String _filename){
@@ -92,7 +106,7 @@ namespace Config_ns{
         
         if(!file){
             Serial.println("There was an error opening the file for reading");
-            Serial.println("Maybe the file %s doesn't esist! Load default values and save them!");
+            Serial.println("Maybe the file %s doesn't esist! Save default values!");
             SaveDefaultsToSPIFFS();
             // Try again opening file for reading 
             file = SPIFFS.open(filename, FILE_READ);
@@ -197,7 +211,7 @@ namespace Config_ns{
                 if(it->value_type == "Bool"){
                     bool bb = (it->value_default == "true"); 
                     doc[it->key] = bb;
-                    //Serial.println(bb);
+                    //Serial.printf("value_default=%s value_saved=%d\r\n",it->value_default.c_str(),bb);
                 }else if(it->value_type == "Int"){
                     int ii = atoi(it->value_default.c_str()); 
                     doc[it->key]=ii;
