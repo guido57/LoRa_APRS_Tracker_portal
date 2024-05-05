@@ -33,6 +33,7 @@ extern unsigned long lastConnectTry;
 /** Current WLAN status */
 extern unsigned int status;
 
+void AccessPointSetup();
 void CaptivePortalSetup();
-void WiFi_loop();
+void WiFi_loop(bool access_point_enabled);
 
