@@ -1,5 +1,5 @@
 /** Handle root or redirect to captive portal */
-#include <arduino.h>
+#include <Arduino.h>
 #include <handleHttp.h>
 #include <captive_portal.h>
 #include <config.h>
@@ -15,8 +15,7 @@ extern WebServer web_server;
 namespace handlehttp {
 // ==================================================================================================
 void handleRoot() {
-  Serial.println("handleRoot");
-
+  //Serial.println("handleRoot");
  
   if (captivePortal()) { // If captive portal redirect instead of displaying the page.
     return;
@@ -103,10 +102,10 @@ void handleRoot() {
            );
   
   
-  Serial.println("scan start");
+  //Serial.println("scan start");
   int n = 0;
   n = WiFi.scanNetworks();
-  Serial.println("scan done");
+  //Serial.println("scan done");
   if (n > 0) {
     for (int i = 0; i < n; i++) {
       Page += String(F("\r\n<tr><td>SSID ")) + WiFi.SSID(i) + ((WiFi.encryptionType(i) == WIFI_AUTH_OPEN) ? F(" ") : F(" *")) + F(" (") + WiFi.RSSI(i) + F(")</td></tr>");
@@ -125,23 +124,23 @@ void handleRoot() {
 // ==================================================================================================
 /** Redirect to captive portal if we got a request for another domain. Return true in that case so the page handler do not try to handle the request again. */
 boolean captivePortal() {
-  Serial.println("==== Captive portal verification ...");
-  Serial.print("hostHeader: "); Serial.println(web_server.hostHeader());
+  //Serial.println("==== Captive portal verification ...");
+  //Serial.print("hostHeader: "); Serial.println(web_server.hostHeader());
   if (!isIp(web_server.hostHeader()) && web_server.hostHeader() != (String(myHostname) + ".local")) {
-    Serial.print("Captive portal location: "); Serial.println(String("http://") + toStringIp(web_server.client().localIP()));
+    //Serial.print("Captive portal location: "); Serial.println(String("http://") + toStringIp(web_server.client().localIP()));
     web_server.sendHeader("Location", String("http://") + toStringIp(web_server.client().localIP()), true);
     web_server.send(302, "text/plain", "");   // Empty content inhibits Content-length header so we have to close the socket ourselves.
     web_server.client().stop(); // Stop is needed because we sent no content length
-    Serial.println("==== Captive portal verification returned True");
+    //Serial.println("==== Captive portal verification returned True");
     return true;
   }
-  Serial.println("==== Captive portal verification returned False");
+  //Serial.println("==== Captive portal verification returned False");
   return false;
 }
 // ==================================================================================================
 /** Handle the root save form and redirect to the root config page again */
 void handleSettingsSave() {
-  Serial.println("handleSettingsSave");
+  //Serial.println("handleSettingsSave");
 
   for(int i=0; i<Config_ns::Entries.size() ; i++){
     Config_ns::Entry * ee = &Config_ns::Entries[i];
@@ -175,7 +174,7 @@ void handleSettingsSave() {
 // ==================================================================================================
 /** Handle the root restore settings and redirect to the root config page again */
 void handleRestoreSettings() {
-  Serial.println("handleRestoreSettings");
+  //Serial.println("handleRestoreSettings");
 
   cc.SaveDefaultsToSPIFFS();
   cc.LoadEntriesFromSPIFFS();
